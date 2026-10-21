@@ -88,7 +88,7 @@ if (preg_match('#^/leilao/(\d+)$#', $caminho, $m) && ($leilao = $repositorio->bu
         'csrf' => $_SESSION['csrf'],
         'leilao' => $leilao,
         'token' => $tokens->emitir($usuario['id'], $usuario['nome']),
-        'wsUrl' => Config::get('WS_PUBLIC_URL', 'ws://localhost:8080'),
+        'wsUrl' => Config::get('WS_PUBLIC_URL', 'ws://localhost:8090'),
     ]);
     exit;
 }

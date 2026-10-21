@@ -29,7 +29,7 @@ $repositorio = function () use (&$pdo): LeilaoRepositorio {
 };
 
 $sala = new SalaDeLeilao($repositorio, new TokenDeSala(Config::get('APP_SECRET')));
-$porta = (int) Config::get('WS_PORT', '8080');
+$porta = (int) Config::get('WS_PORT', '8090');
 
 $servidor = IoServer::factory(new HttpServer(new WsServer($sala)), $porta);
 $servidor->loop->addPeriodicTimer(1, fn () => $sala->verificarEncerramentos());
