@@ -1,0 +1,45 @@
+services:
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      TZ: ${TZ}
+    volumes:
+      - dados-mysql:/var/lib/mysql
+      - ./docker/mysql:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      # Só fica saudável depois que os scripts de criação terminaram (conexão TCP real)
+      test: ["CMD-SHELL", "mysql -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD -e 'SELECT 1 FROM lances LIMIT 1' $$MYSQL_DATABASE"]
+      interval: 3s
+      timeout: 5s
+      retries: 40
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    env_file: .env
+    ports:
+      - "${APP_HTTP_PORT}:80"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  websocket:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    command: ["php", "bin/servidor-ws.php"]
+    env_file: .env
+    ports:
+      - "${WS_PORT}:${WS_PORT}"
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  dados-mysql:
