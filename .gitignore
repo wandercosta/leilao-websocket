@@ -1,0 +1,22 @@
+# Dependências (instaladas com composer install)
+/vendor/
+
+# Variáveis de ambiente locais
+.env
+
+# IDEs e sistema
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Testes e build
+.phpunit.cache/
+.phpunit.result.cache
+/build/
+*.log
+
+# Dumps de banco
+*.sql.gz
+*.dump
+dump*.sql
