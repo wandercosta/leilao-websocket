@@ -4,6 +4,8 @@
 
 Sala de leilão em tempo real: cada lance é validado no servidor e aparece na hora para todos os navegadores conectados.
 
+**Demo online:** <https://leilao.auradevcode.com.br> · entre com `ana@exemplo.com` / `demo1234` e, numa janela anônima, com `bruno@exemplo.com` / `demo1234`. O banco é recriado todo dia às 4h.
+
 ![Duas janelas dando lances no mesmo lote ao mesmo tempo](docs/demo.gif)
 
 > Projeto criado em 2023 e modernizado em 2026.
