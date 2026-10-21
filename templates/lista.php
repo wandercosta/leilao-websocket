@@ -9,7 +9,7 @@ $titulo = 'Lotes · Leilão ao vivo';
 <div class="grade-lotes">
     <?php foreach ($leiloes as $l): ?>
         <a class="cartao lote <?= $l['encerrado'] ? 'lote-encerrado' : '' ?>" href="/leilao/<?= $l['id'] ?>">
-            <img src="<?= $e($l['imagem']) ?>" alt="" loading="lazy">
+            <img src="<?= $e($l['imagem']) ?>" alt="">
             <div class="lote-corpo">
                 <span class="selo <?= $l['encerrado'] ? 'selo-encerrado' : 'selo-aberto' ?>">
                     <?= $l['encerrado'] ? 'Encerrado' : 'Aberto' ?>
